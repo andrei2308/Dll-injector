@@ -101,5 +101,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 This project is intended for educational purposes only. Use it responsibly and ensure you have permission before injecting a DLL into any process.
 
 ---
-
-Feel free to customize this `README.md` as needed! Let me know if you’d like further assistance.
