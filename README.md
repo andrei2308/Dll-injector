@@ -63,7 +63,7 @@ Identify the **Process ID (PID)** of the target process:
 
 Run the injector with the path to your compiled DLL and the target PID:
 ```bash
-injector.exe <path-to-dll> <PID>
+injector.exe <path-to-dll> <process-name>
 ```
 
 #### Example:
