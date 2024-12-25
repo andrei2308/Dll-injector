@@ -1,6 +1,34 @@
 #include <Windows.h>
 #include <stdio.h>
+#include <TlHelp32.h>
+#include <string.h>
+DWORD getPIDByName(const char* processName)
+{
+	HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+	if (hSnapshot == INVALID_HANDLE_VALUE) {
+		printf("Failed to take a process snapshot: %d\n", GetLastError());
+		return 0;
+	}
+	PROCESSENTRY32W processEntry;
+	processEntry.dwSize = sizeof(PROCESSENTRY32W);
 
+	if (Process32FirstW(hSnapshot, &processEntry))
+	{
+		do {
+			WCHAR wideProcessName[MAX_PATH];
+			MultiByteToWideChar(CP_ACP, 0, processName, -1, wideProcessName, MAX_PATH);
+
+			if (wcscmp(wideProcessName, processEntry.szExeFile) == 0)
+			{
+				CloseHandle(hSnapshot);
+				return processEntry.th32ProcessID;
+			}
+		} while (Process32NextW(hSnapshot, &processEntry));
+	}
+	CloseHandle(hSnapshot);
+	printf("Process '%s' not found.\n", processName);
+	return 0;
+}
 int main(int argc, char** argv)
 {
 	if (argc != 3) {
@@ -8,7 +36,9 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	PCSTR dll_path = argv[1];
-	DWORD PID = atoi(argv[2]);
+	PCSTR process_name = argv[2];
+	DWORD PID = getPIDByName(process_name);
+	printf("PID returned from function: %d\n", PID);
 	HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, PID);
 	if (hProcess == NULL) {
 		printf("Failed to retrieve handle to remote process: %d\n",GetLastError());

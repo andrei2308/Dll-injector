@@ -1,0 +1,7 @@
+﻿  Dll-injector.cpp
+  DLL.cpp
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 5 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  DLL.vcxproj -> C:\Users\Andrei\source\repos\DLL\x64\Release\DLL.exe
