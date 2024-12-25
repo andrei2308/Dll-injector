@@ -32,7 +32,7 @@ DWORD getPIDByName(const char* processName)
 int main(int argc, char** argv)
 {
 	if (argc != 3) {
-		printf("usage: dll-injector.exe <path-to-dll> <PID> \n");
+		printf("usage: dll-injector.exe <path-to-dll> <process-name> \n");
 		return 1;
 	}
 	PCSTR dll_path = argv[1];
