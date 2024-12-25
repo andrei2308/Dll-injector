@@ -4,7 +4,7 @@ A simple and straightforward DLL Injector for Windows, written in C++. This proj
 
 ## Features
 
-- Injects a custom DLL into a running process by its PID.
+- Injects a custom DLL into a running process by its name.
 - Uses basic Windows API functions for memory allocation and thread creation in the target process.
 - Easy to understand and extend for educational purposes.
 
